@@ -1,0 +1,34 @@
+.signupMain{
+    height: 80vh;
+    width: 30vw;
+    background-color: whitesmoke;
+    box-shadow: gray 1px;
+    border-radius: 10px;
+}
+.LoginMain{
+    height: 40vh;
+    width: 30vw;
+    background-color: whitesmoke;
+    box-shadow: gray 1px;
+    border-radius: 10px;
+}
+.LoginMainDiv{
+    height: 100vh;
+    width: 100vw;
+}
+.LoginMain input{
+    outline: none;
+}
+.card{
+    width: 70vw;
+    background-color: whitesmoke;
+    border-radius: 10px;
+}
+.loginLink{
+    text-decoration: none;
+    color: whitesmoke;
+    margin-left: 100px;
+}
+.bookingCard{
+    margin-top: 100px;
+}

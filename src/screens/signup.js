@@ -1,10 +1,13 @@
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import Button from '../component/button'
 import Input from '../component/input'
 import React from 'react'
 import {useState} from 'react'
+import { useNavigate } from 'react-router'
+import { useDispatch } from 'react-redux'
+import { signUp } from '../config/firebase'
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css'
-import Firebase from '../config/firebase';
+import '../App.css'
+
 
 
 
@@ -13,64 +16,72 @@ function Signup() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [name, setName] = useState("");
+    const [phone, setPhone] = useState("");
+    const [Cnic, setCnic] = useState("");
+    const nevigate = useNavigate();
+    const dispatch = useDispatch();
 
     
-    const signupObj=()=>{
+    const signupObj=(e)=>{
+      e.preventDefault();
         let obj = {
             email,
             password,
             name,
-        }
-        console.log(obj);
-
+            phone,
+            Cnic
+        };
         
-    const auth = getAuth();
-    createUserWithEmailAndPassword(auth, obj.email, obj.password)
-      .then((userCredential) => {
-        // Signed in 
-        const user = userCredential.user;
-        console.log(user)
-        // ...
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorMessage)
-        // ..
-      });
-      alert("User Creat Successfuly")
+        dispatch(signUp(obj,nevigate))
+        console.log(obj)
     }
 
     return (
       <>
-        <div className="d-flex justify-content-center align-item-center h-100 w-50">
-          <div className="d-flex justify-content-center flex-column align-item-center">
+        <div className=" d-flex justify-content-center align-items-center">
+          <div className=" signupMain m-3 d-flex justify-content-around flex-column align-items-center">
+            <form onSubmit={(e)=>signupObj(e)} >
             <h1>Sign Up</h1>
             <div>
-              <Input
+              <Input className="mb-3"
                 placeholder="User Name"
                 type="text"
                 onChange={(e) => setName(e.target.value)}
               />
             </div>
             <div>
-              <Input
+              <Input className="mb-3"
                 placeholder="email"
                 type="email"
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>
             <div>
-              <Input
+              <Input className="mb-3"
                 placeholder="Password"
                 type="password"
                 onChange={(e) => setPassword(e.target.value)}
               />
+              </div>
+              <div>
+              <Input className="mb-3"
+                placeholder="Phone Number"
+                type="Text"
+                onChange={(e) => setPhone(e.target.value)}
+              />
+              </div>
+              <div>
+              <Input className="mb-3"
+                placeholder="Cnic"
+                type="Text"
+                onChange={(e) => setCnic(e.target.value)}
+              />
             </div>
             <div>
-              <Button value="Sign up" onClick={signupObj} >SignUp</Button>
+              <Button className="btn bg-primary" value="Sign up">SignUp</Button>
             </div>
-          </div>
+            </form>
+            </div>
         </div>
       </>
     )

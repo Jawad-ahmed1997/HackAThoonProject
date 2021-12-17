@@ -1,12 +1,15 @@
-import {createStore} from 'redux';
-import Reducer from './Reducer/reducer';
+import { createStore, applyMiddleware } from "redux";
+import loginReducer from "./Reducer/loginreducer";
+import signupreducer from './Reducer/signUpreducer';
+import thunk from "redux-thunk";
+import { combineReducers } from "redux";
 
+const reducer = combineReducers({
+  loginReducer,
+  signupreducer,
+});
 
+const store = createStore(reducer, applyMiddleware(thunk));
+console.log(signupreducer)
 
-const store = createStore(Reducer);
-export  default store;
-
-
-
-
-
+export default store;
